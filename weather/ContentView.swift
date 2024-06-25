@@ -21,6 +21,18 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            if (!locChanged) {
+                Text(viewModel.cityName ?? "")
+                    .font(.system(size: 45))
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+            } else {
+                Text(cityName)
+                    .font(.system(size: 45))
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+            }
+            
             TextField("Enter city name", text: $cityTemp, onCommit: {
                 viewModel.getCoordinates(for: cityTemp)
             })
@@ -43,15 +55,19 @@ struct ContentView: View {
                 }
                 Text("Temperature: \(temperature)°F")
                 Text("Description: \(description)")
-                if (!locChanged) {
-                    Text("Location: \(viewModel.cityName ?? "")")
-                } else {
-                    Text("Location: \(cityName)")
-                }
             } else {
                 Text("Fetching weather data...")
             }
-        }
+        }//end of VStack
+        
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //RANDO WEATHER CODE IGNORE
         .onAppear {
             if let location = locationManager.location {
                 fetchWeather(for: location)
@@ -62,16 +78,7 @@ struct ContentView: View {
                 fetchWeather(for: location)
             }
         }
-    }
-
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //RANDO WEATHER CODE IGNORE
+    }//end of view
     
     private func fetchWeather(for location: CLLocation) {
         let weatherService = WeatherService()
