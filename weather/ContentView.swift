@@ -20,64 +20,59 @@ struct ContentView: View {
     @State private var cityName: String = ""
     
     var body: some View {
-        if let weather = weather {
-            VStack {
-                if (!locChanged) {
-                    Text(viewModel.cityName ?? "")
-                        .font(.system(size: 45))
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                } else {
-                    Text(cityName)
-                        .font(.system(size: 45))
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                }
-                ZStack{
-                    RoundedRectangle(cornerRadius: 15.0)
-                        .frame(width: 300.0)
-                        .frame(height: 250.0)
-                        .foregroundColor(.cyan)
-                        .shadow(radius: 10.0)
-                    VStack{
-                        var temperature = 1.8 * weather.main.temp + 32
-                        var description = weather.weather.first?.description ?? ""
-                        
-                        Button("change location") {
-                            if (cityTemp=="") {}
-                            else {
-                                cityName = cityTemp
-                                locChanged = true
-                                fetchWeather()
-                                temperature = 1.8 * weather.main.temp + 32
-                                description = weather.weather.first?.description ?? ""
-                            }
+        VStack {
+            if (!locChanged) {
+                Text(viewModel.cityName ?? "")
+                    .font(.system(size: 45))
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+            } else {
+                Text(cityName)
+                    .font(.system(size: 45))
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+            }
+            ZStack{
+                RoundedRectangle(cornerRadius: 15.0)
+                    .frame(width: 300.0)
+                    .frame(height: 250.0)
+                    .foregroundColor(.cyan)
+                    .shadow(radius: 10.0)
+                VStack{
+                    var temperature = 1.8 * (weather?.main.temp ?? 0.0) + 32
+                    var description = weather?.weather.first?.description ?? ""
+                    
+                    Button("change location") {
+                        if (cityTemp=="") {}
+                        else {
+                            cityName = cityTemp
+                            locChanged = true
+                            fetchWeather()
+                            temperature = 1.8 * (weather?.main.temp ?? 0.0) + 32
+                            description = weather?.weather.first?.description ?? ""
                         }
-                        Text("Temperature: \(temperature)°F")
-                        Text("Description: \(description)")
-                        
-                        
-                        TextField("Enter city name", text: $cityTemp, onCommit: {
-                            viewModel.getCoordinates(for: cityTemp)
-                        })
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                    }//end of VStack
-                }//end of ZStack
-            }//end of VStack
-            .onAppear {
-                if let location = locationManager.location {
-                    fetchWeather(for: location)
-                }
+                    }
+                    Text("Temperature: \(temperature)°F")
+                    Text("Description: \(description)")
+                    
+                    
+                    TextField("Enter city name", text: $cityTemp, onCommit: {
+                        viewModel.getCoordinates(for: cityTemp)
+                    })
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                }//end of VStack
+            }//end of ZStack
+        }//end of VStack
+        .onAppear {
+            if let location = locationManager.location {
+                fetchWeather(for: location)
             }
-            .onChange(of: locationManager.location) { oldLocation, newLocation in
-                if let location = newLocation {
-                    fetchWeather(for: location)
-                }
+        }
+        .onChange(of: locationManager.location) { oldLocation, newLocation in
+            if let location = newLocation {
+                fetchWeather(for: location)
             }
-        }//end of if
-        else {
-            Text("Fetching weather data...")
         }
     }//end of view
     
