@@ -4,8 +4,6 @@
 //
 //  Created by Scholar on 6/21/24.
 //
-//yrehsdfgurejwidhufjnwodihrifguhjn
-//hellliufgehjbsdjeiorwjowkgfnfjfreoijfiuerjnreoi
 
 import SwiftUI
 import CoreLocation
@@ -16,7 +14,7 @@ struct ContentView: View {
     @State private var weather: WeatherResponse?
     @State private var locChanged = false
     @StateObject private var viewModel = LocationViewModel()
-    @State private var city: String = ""
+    @State private var city = "San Francisco"
 
     var body: some View {
         VStack {
@@ -26,54 +24,24 @@ struct ContentView: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding()
             
-            if let latitude = viewModel.latitude, let longitude = viewModel.longitude {
-                Text("Latitude: \(latitude)")
-                Text("Longitude: \(longitude)")
-            } else if let errorMessage = viewModel.errorMessage {
-                Text("Error: \(errorMessage)")
-                    .foregroundColor(.red)
-            }
-            
-            
             if let weather = weather {
                 var temperature = 1.8 * weather.main.temp + 32
                 var description = weather.weather.first?.description ?? ""
-                var loc = locationManager.location
-               // var lat = loc.coordinate.latitude
-                //var long = loc.coordinate.longitude
                 
-               
-                
-                
-                
-                Button("Paris") {
+                Button("enter new location") {
                     locChanged = true
                     fetchWeather()
                     temperature = 1.8 * weather.main.temp + 32
                     description = weather.weather.first?.description ?? ""
-                    loc = locationManager.location
                 }
                 Text("Temperature: \(temperature)°F")
                 Text("Description: \(description)")
-                Text("Location: \(loc)")
+                
+                Text("Location: \(city)")
             } else {
                 Text("Fetching weather data...")
             }
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         .onAppear {
             if let location = locationManager.location {
                 fetchWeather(for: location)
@@ -86,6 +54,17 @@ struct ContentView: View {
         }
     }
 
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            ContentView()
+        }
+    }
+
+        
+    //
+    //
+    //
+    //RANDOM WEATHER FUNCTIONS IGNORE
     private func fetchWeather(for location: CLLocation) {
         let weatherService = WeatherService()
         weatherService.getWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { response in
@@ -100,12 +79,6 @@ struct ContentView: View {
                 self.weather = response
             }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
 
@@ -125,12 +98,3 @@ func getCoordinate( addressString : String,
         completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
     }
 }
-/*
-@main
-struct YourApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}*/
