@@ -53,7 +53,8 @@ struct ContentView: View {
                     .shadow(radius: 10.0)
                 VStack{
                     Text("\(temperature)°F")
-                    Text("Description: \(description)")
+                        .font(.system(size: 60))
+                    Text(description)
                     
                     TextField("Enter city name", text: $cityTemp, onCommit: {
                         viewModel.getCoordinates(for: cityTemp)
