@@ -14,34 +14,15 @@ struct ContentView: View {
     @State private var weather: WeatherResponse?
     @State private var locChanged = false
     @StateObject private var viewModel = LocationViewModel()
-    @State private var city: String = ""
-    @State private var latitude: String = ""
-    @State private var longitude: String = ""
-
+    @State private var cityTemp: String = ""
+    @State private var latitude: Double = 0.0
+    @State private var longitude: Double = 0.0
+    @State private var cityName: String = ""
+    
     var body: some View {
         VStack {
-            // Coordinates to City
-            TextField("Enter latitude", text: $latitude)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            TextField("Enter longitude", text: $longitude)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            Button("Get City Name") {
-                if let lat = Double(latitude), let lon = Double(longitude) {
-                    viewModel.getCityName(for: lat, longitude: lon)
-                }
-            }
-
-            if let cityName = viewModel.cityName {
-                Text("City: \(cityName)")
-            } else if let errorMessage = viewModel.errorMessage {
-                Text("Error: \(errorMessage)")
-                    .foregroundColor(.red)
-            }
-            
-            TextField("Enter city name", text: $city, onCommit: {
-                viewModel.getCoordinates(for: city)
+            TextField("Enter city name", text: $cityTemp, onCommit: {
+                viewModel.getCoordinates(for: cityTemp)
             })
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding()
@@ -51,14 +32,22 @@ struct ContentView: View {
                 var description = weather.weather.first?.description ?? ""
                 
                 Button("change location") {
-                    locChanged = true
-                    fetchWeather()
-                    temperature = 1.8 * weather.main.temp + 32
-                    description = weather.weather.first?.description ?? ""
+                    if (cityTemp=="") {}
+                    else {
+                        cityName = cityTemp
+                        locChanged = true
+                        fetchWeather()
+                        temperature = 1.8 * weather.main.temp + 32
+                        description = weather.weather.first?.description ?? ""
+                    }
                 }
                 Text("Temperature: \(temperature)°F")
                 Text("Description: \(description)")
-                Text("Location: \(city)")
+                if (!locChanged) {
+                    Text("Location: \(viewModel.cityName ?? "")")
+                } else {
+                    Text("Location: \(cityName)")
+                }
             } else {
                 Text("Fetching weather data...")
             }
@@ -83,15 +72,20 @@ struct ContentView: View {
     //
     //
     //RANDO WEATHER CODE IGNORE
+    
     private func fetchWeather(for location: CLLocation) {
         let weatherService = WeatherService()
         weatherService.getWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { response in
             self.weather = response
         }
+        latitude = location.coordinate.latitude
+        longitude = location.coordinate.longitude
+        viewModel.getCityName(for: latitude, longitude: longitude)
     }
     
     private func fetchWeather() {
         let weatherService = WeatherService()
+        //viewModel.getCoordinates(for: cityTemp)
         if let latitude = viewModel.latitude, let longitude = viewModel.longitude {
             weatherService.getWeather(latitude: latitude, longitude: longitude) { response in
                 self.weather = response
