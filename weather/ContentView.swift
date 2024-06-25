@@ -4,6 +4,8 @@
 //
 //  Created by Scholar on 6/21/24.
 //
+//yrehsdfgurejwidhufjnwodihrifguhjn
+//hellliufgehjbsdjeiorwjowkgfnfjfreoijfiuerjnreoi
 
 import SwiftUI
 import CoreLocation
@@ -40,11 +42,7 @@ struct ContentView: View {
                // var lat = loc.coordinate.latitude
                 //var long = loc.coordinate.longitude
                 
-                let valid = "New Orleans, Louisiana, USA"
-                let invalid = "The Moon"
-
-                
-                
+               
                 
                 
                 
@@ -97,8 +95,10 @@ struct ContentView: View {
     
     private func fetchWeather() {
         let weatherService = WeatherService()
-            weatherService.getWeather(latitude: 48.864716, longitude: 2.349014) { response in
+        if let latitude = viewModel.latitude, let longitude = viewModel.longitude {
+            weatherService.getWeather(latitude: latitude, longitude: longitude) { response in
                 self.weather = response
+            }
         }
     }
 }
