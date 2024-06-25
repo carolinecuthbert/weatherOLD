@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var weather: WeatherResponse?
     @State private var locChanged = false
     @StateObject private var viewModel = LocationViewModel()
-    @State private var city = "San Francisco"
+    @State private var city: String = ""
 
     var body: some View {
         VStack {
@@ -28,7 +28,7 @@ struct ContentView: View {
                 var temperature = 1.8 * weather.main.temp + 32
                 var description = weather.weather.first?.description ?? ""
                 
-                Button("enter new location") {
+                Button("change location") {
                     locChanged = true
                     fetchWeather()
                     temperature = 1.8 * weather.main.temp + 32
@@ -36,7 +36,6 @@ struct ContentView: View {
                 }
                 Text("Temperature: \(temperature)°F")
                 Text("Description: \(description)")
-                
                 Text("Location: \(city)")
             } else {
                 Text("Fetching weather data...")
@@ -53,18 +52,21 @@ struct ContentView: View {
             }
         }
     }
-
+    
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
             ContentView()
         }
     }
 
-        
     //
     //
     //
-    //RANDOM WEATHER FUNCTIONS IGNORE
+    //
+    //
+    //
+    //
+    //RANDO WEATHER CODE IGNORE
     private func fetchWeather(for location: CLLocation) {
         let weatherService = WeatherService()
         weatherService.getWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { response in
