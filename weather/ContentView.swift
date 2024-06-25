@@ -21,6 +21,8 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            var temperature = Int(1.8 * (weather?.main.temp ?? 0.0) + 32)
+            var description = weather?.weather.first?.description ?? ""
             if (!locChanged) {
                 Text(viewModel.cityName ?? "")
                     .font(.system(size: 45))
@@ -32,29 +34,26 @@ struct ContentView: View {
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
             }
+            Button("edit location") {
+                if (cityTemp=="") {}
+                else {
+                    cityName = cityTemp
+                    locChanged = true
+                    fetchWeather()
+                    temperature = Int(1.8 * (weather?.main.temp ?? 0.0) + 32)
+                    description = weather?.weather.first?.description ?? ""
+                }
+            }
+            .foregroundColor(Color("dark blue"))
             ZStack{
                 RoundedRectangle(cornerRadius: 15.0)
                     .frame(width: 300.0)
                     .frame(height: 250.0)
-                    .foregroundColor(.cyan)
+                    .foregroundColor(Color ("light blue"))
                     .shadow(radius: 10.0)
                 VStack{
-                    var temperature = 1.8 * (weather?.main.temp ?? 0.0) + 32
-                    var description = weather?.weather.first?.description ?? ""
-                    
-                    Button("change location") {
-                        if (cityTemp=="") {}
-                        else {
-                            cityName = cityTemp
-                            locChanged = true
-                            fetchWeather()
-                            temperature = 1.8 * (weather?.main.temp ?? 0.0) + 32
-                            description = weather?.weather.first?.description ?? ""
-                        }
-                    }
-                    Text("Temperature: \(temperature)°F")
+                    Text("\(temperature)°F")
                     Text("Description: \(description)")
-                    
                     
                     TextField("Enter city name", text: $cityTemp, onCommit: {
                         viewModel.getCoordinates(for: cityTemp)
