@@ -15,9 +15,31 @@ struct ContentView: View {
     @State private var locChanged = false
     @StateObject private var viewModel = LocationViewModel()
     @State private var city: String = ""
+    @State private var latitude: String = ""
+    @State private var longitude: String = ""
 
     var body: some View {
         VStack {
+            // Coordinates to City
+            TextField("Enter latitude", text: $latitude)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            TextField("Enter longitude", text: $longitude)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            Button("Get City Name") {
+                if let lat = Double(latitude), let lon = Double(longitude) {
+                    viewModel.getCityName(for: lat, longitude: lon)
+                }
+            }
+
+            if let cityName = viewModel.cityName {
+                Text("City: \(cityName)")
+            } else if let errorMessage = viewModel.errorMessage {
+                Text("Error: \(errorMessage)")
+                    .foregroundColor(.red)
+            }
+            
             TextField("Enter city name", text: $city, onCommit: {
                 viewModel.getCoordinates(for: city)
             })
@@ -50,12 +72,6 @@ struct ContentView: View {
             if let location = newLocation {
                 fetchWeather(for: location)
             }
-        }
-    }
-    
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            ContentView()
         }
     }
 
@@ -98,5 +114,11 @@ func getCoordinate( addressString : String,
         }
 
         completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
