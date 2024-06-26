@@ -31,6 +31,7 @@ struct ContentView: View {
     @State private var athletic = false
     @State private var casual = false
     @State private var editLoc = false
+    @State private var listRecs = ""
     
     var body: some View {
         VStack {
@@ -63,10 +64,11 @@ struct ContentView: View {
                 Spacer()
                     .frame(height: 30.0)
             } else {
-                TextField("Enter city name...", text: $cityTemp, onCommit: {
+                TextField("Enter city...", text: $cityTemp, onCommit: {
                     viewModel.getCoordinates(for: cityTemp)
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .font(.system(size: 45))
                 .padding(.horizontal, 40.0)
                 Button("enter") {
                     if (cityTemp=="") {}
@@ -81,9 +83,9 @@ struct ContentView: View {
                     }
                 }
                 .foregroundColor(Color("dark blue"))
-                .font(.system(size: 25))
+                .font(.system(size: 21))
                 Spacer()
-                    .frame(height: 33.0)
+                    .frame(height: 10.0)
             }
             ZStack{
                 RoundedRectangle(cornerRadius: 15.0)
@@ -113,11 +115,7 @@ struct ContentView: View {
                 .multilineTextAlignment(.center)
             HStack{
                 if (formal) {
-                    Button("Formal") {
-                        self.formal = true
-                        self.athletic = false
-                        self.casual = false
-                    }
+                    Button("Formal") {}
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
                     .foregroundStyle(Color.black)
@@ -128,6 +126,7 @@ struct ContentView: View {
                         self.formal = true
                         self.athletic = false
                         self.casual = false
+                        fetchRecs()
                     }
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
@@ -137,11 +136,7 @@ struct ContentView: View {
                 Spacer()
                     .frame(width: 20.0)
                 if (athletic) {
-                    Button("Athletic") {
-                        self.athletic = true
-                        self.formal = false
-                        self.casual = false
-                    }
+                    Button("Athletic") {}
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
                     .foregroundStyle(Color.black)
@@ -152,6 +147,7 @@ struct ContentView: View {
                         self.athletic = true
                         self.formal = false
                         self.casual = false
+                        fetchRecs()
                     }
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
@@ -161,11 +157,7 @@ struct ContentView: View {
                 Spacer()
                     .frame(width: 20.0)
                 if (casual) {
-                    Button("Casual") {
-                        self.casual = true
-                        self.formal = false
-                        self.athletic = false
-                    }
+                    Button("Casual") {}
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
                     .foregroundStyle(Color.black)
@@ -176,6 +168,7 @@ struct ContentView: View {
                         self.casual = true
                         self.formal = false
                         self.athletic = false
+                        fetchRecs()
                     }
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
@@ -184,12 +177,21 @@ struct ContentView: View {
                 }
             }//end of HStack
             Spacer()
+                .frame(height: 30.0)
             HStack{
                 Text("Recommended:")
-                    .font(.system(size: 30))
+                    .font(.system(size: 40))
                     .fontWeight(.semibold)
                 Spacer()
-            }.padding(25.0)
+            }.padding(.horizontal, 25.0)
+            HStack{
+                Text(listRecs)
+                    .font(.system(size: 30))
+                Spacer()
+            }
+            .padding(.leading, 75.0)
+            .padding(.trailing, 25.0)
+            Spacer()
         }//end of VStack
         .padding(.top, 10.0)
         .onAppear {
@@ -203,6 +205,23 @@ struct ContentView: View {
             }
         }
     }//end of body
+    
+    private func fetchRecs() {
+        listRecs = ""
+        var recs = [String] ()
+        if (formal) {
+            recs.append("formal attire")
+        }
+        if (athletic) {
+            recs.append("athletic attire")
+        }
+        if (casual) {
+            recs.append("casual attire")
+        }
+        for item in recs {
+            listRecs = listRecs + "- \(item)\n"
+        }
+    }
     
     //
     //
