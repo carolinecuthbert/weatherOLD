@@ -4,15 +4,6 @@
 //
 //  Created by Scholar on 6/21/24.
 //
-/*
- broken clouds
- clear sky
- light rain
- overcast clouds
- scattered clouds
- thunderstorm with rain
- */
-
 
 import SwiftUI
 import CoreLocation
@@ -51,14 +42,15 @@ struct ContentView: View {
                 }
                 Button("edit location") {
                     self.editLoc = true
-                    if (cityTemp=="") {}
-                    else {
-                        cityName = cityTemp
-                        locChanged = true
-                        fetchWeather()
-                        temperature = Int(1.8 * (weather?.main.temp ?? 0.0) + 32)
-                        description = weather?.weather.first?.description ?? ""
-                    }
+                    self.listRecs = ""
+                    self.formal = false
+                    self.athletic = false
+                    self.casual = false
+                    cityName = cityTemp
+                    locChanged = true
+                    fetchWeather()
+                    temperature = Int(1.8 * (weather?.main.temp ?? 0.0) + 32)
+                    description = weather?.weather.first?.description ?? ""
                 }
                 .foregroundColor(Color("dark blue"))
                 Spacer()
@@ -126,7 +118,7 @@ struct ContentView: View {
                         self.formal = true
                         self.athletic = false
                         self.casual = false
-                        fetchRecs()
+                        fetchRecs(temp: temperature, info: description)
                     }
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
@@ -147,7 +139,7 @@ struct ContentView: View {
                         self.athletic = true
                         self.formal = false
                         self.casual = false
-                        fetchRecs()
+                        fetchRecs(temp: temperature, info: description)
                     }
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
@@ -168,7 +160,7 @@ struct ContentView: View {
                         self.casual = true
                         self.formal = false
                         self.athletic = false
-                        fetchRecs()
+                        fetchRecs(temp: temperature, info: description)
                     }
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
@@ -185,9 +177,11 @@ struct ContentView: View {
                 Spacer()
             }.padding(.horizontal, 25.0)
             HStack{
-                Text(listRecs)
-                    .font(.system(size: 30))
-                Spacer()
+                if (!editLoc) {
+                    Text(listRecs)
+                        .font(.system(size: 30))
+                    Spacer()
+                }
             }
             .padding(.leading, 75.0)
             .padding(.trailing, 25.0)
@@ -206,17 +200,80 @@ struct ContentView: View {
         }
     }//end of body
     
-    private func fetchRecs() {
-        listRecs = ""
+    private func fetchRecs(temp: Int, info: String) {
         var recs = [String] ()
+        listRecs = ""
+        var warmth = ""
         if (formal) {
-            recs.append("formal attire")
+            if (temp<30) {
+                recs.append("Formal attire")
+                recs.append("Freezing")
+            }
+            else if (temp<50) {
+                recs.append("Formal attire")
+                recs.append("Cool")
+            }
+            else if (temp<75) {
+                recs.append("Formal attire")
+                recs.append("Warm")
+            }
+            else {
+                recs.append("Formal attire")
+                recs.append("Hot")
+            }
         }
-        if (athletic) {
-            recs.append("athletic attire")
+        else if (athletic) {
+            if (temp<30) {
+                recs.append("Athletic attire")
+                recs.append("Freezing")
+            }
+            else if (temp<50) {
+                recs.append("Athletic attire")
+                recs.append("Cool")
+            }
+            else if (temp<75) {
+                recs.append("Athletic attire")
+                recs.append("Warm")
+            }
+            else {
+                recs.append("Athletic attire")
+                recs.append("Hot")
+            }
         }
-        if (casual) {
-            recs.append("casual attire")
+        else if (casual) {
+            if (temp<30) {
+                recs.append("Casual attire")
+                recs.append("Freezing")
+            }
+            else if (temp<50) {
+                recs.append("Casual attire")
+                recs.append("Cool")
+            }
+            else if (temp<75) {
+                recs.append("Casual attire")
+                recs.append("Warm")
+            }
+            else {
+                recs.append("Casual attire")
+                recs.append("Hot")
+            }
+        }
+        if info.contains("rain") || info.contains("storm"){
+            recs.append("Raincoat")
+            if info.contains("thunder") || info.contains("lightning") {
+                recs.append("Rainboots")
+            }
+        }
+        if info.contains("hail") {
+            recs.append("Helmet")
+            recs.append("Waterproof jacket")
+        }
+        if info.contains("snow") {
+            recs.append("Snow jacket")
+            recs.append("Snow pants")
+            recs.append("Snow boots")
+            recs.append("Mittens")
+            recs.append("Beanie")
         }
         for item in recs {
             listRecs = listRecs + "- \(item)\n"
