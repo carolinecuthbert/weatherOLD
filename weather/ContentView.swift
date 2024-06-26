@@ -4,6 +4,15 @@
 //
 //  Created by Scholar on 6/21/24.
 //
+/*
+ broken clouds
+ clear sky
+ light rain
+ overcast clouds
+ scattered clouds
+ thunderstorm with rain
+ */
+
 
 import SwiftUI
 import CoreLocation
@@ -18,6 +27,9 @@ struct ContentView: View {
     @State private var latitude: Double = 0.0
     @State private var longitude: Double = 0.0
     @State private var cityName: String = ""
+    @State private var formal = false
+    @State private var athletic = false
+    @State private var casual = false
     
     var body: some View {
         VStack {
@@ -48,21 +60,63 @@ struct ContentView: View {
             ZStack{
                 RoundedRectangle(cornerRadius: 15.0)
                     .frame(width: 300.0)
-                    .frame(height: 250.0)
+                    .frame(height: 200.0)
                     .foregroundColor(Color ("light blue"))
-                    .shadow(radius: 10.0)
+                    .shadow(radius: 5.0)
                 VStack{
                     Text("\(temperature)°F")
                         .font(.system(size: 60))
+                        .multilineTextAlignment(.center)
                     Text(description)
-                    
-                    TextField("Enter city name", text: $cityTemp, onCommit: {
-                        viewModel.getCoordinates(for: cityTemp)
-                    })
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                        .font(.system(size: 40))
+                        .padding(.horizontal, 60)
+                        .multilineTextAlignment(.center)
                 }//end of VStack
             }//end of ZStack
+            Spacer()
+                .frame(height: 10.0)
+            Text("Occasion:")
+                .font(.system(size: 30))
+                .fontWeight(.semibold)
+                .multilineTextAlignment(.center)
+            HStack{
+                Button("Formal") {
+                    print("hi")
+                }
+                    .font(.title2)
+                    .buttonStyle(.borderedProminent)
+                    .foregroundStyle(Color.black)
+                    .tint(Color("for"))
+                Spacer()
+                    .frame(width: 20.0)
+                Button("Athletic") {
+                    print("hi")
+                }
+                    .font(.title2)
+                    .buttonStyle(.borderedProminent)
+                    .foregroundStyle(Color.black)
+                    .tint(Color("ath"))
+                Spacer()
+                    .frame(width: 20.0)
+                Button("Casual") {
+                    print("hi")
+                }
+                    .font(.title2)
+                    .buttonStyle(.borderedProminent)
+                    .foregroundStyle(Color.black)
+                    .tint(Color("cas"))
+            }//end of HStack
+            Spacer()
+            Text("Recommended:")
+                .font(.system(size: 30))
+                .fontWeight(.semibold)
+                .multilineTextAlignment(.left)
+                .multilineTextAlignment(.leading)
+            TextField("Enter city name", text: $cityTemp, onCommit: {
+                viewModel.getCoordinates(for: cityTemp)
+            })
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .padding()
         }//end of VStack
         .onAppear {
             if let location = locationManager.location {
