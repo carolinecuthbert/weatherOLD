@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD2FFDCB2C2CA46C0037A808 /* EditLocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FFDCA2C2CA46C0037A808 /* EditLocView.swift */; };
 		BD989B8C2C262849005DE0A5 /* weatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD989B8B2C262849005DE0A5 /* weatherApp.swift */; };
 		BD989B8E2C262849005DE0A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD989B8D2C262849005DE0A5 /* ContentView.swift */; };
 		BD989B902C26285D005DE0A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD989B8F2C26285D005DE0A5 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD2FFDCA2C2CA46C0037A808 /* EditLocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocView.swift; sourceTree = "<group>"; };
 		BD989B882C262849005DE0A5 /* weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD989B8B2C262849005DE0A5 /* weatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherApp.swift; sourceTree = "<group>"; };
 		BD989B8D2C262849005DE0A5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				BD989B992C262F5A005DE0A5 /* Info.plist */,
 				BD989B8B2C262849005DE0A5 /* weatherApp.swift */,
 				BD989B8D2C262849005DE0A5 /* ContentView.swift */,
+				BD2FFDCA2C2CA46C0037A808 /* EditLocView.swift */,
 				BDC835F62C2B25B500133FFE /* LocationViewModel.swift */,
 				BD989B9A2C2631EE005DE0A5 /* LocationManager.swift */,
 				BD989B9C2C263200005DE0A5 /* WeatherService.swift */,
@@ -151,6 +154,7 @@
 				BD989B9D2C263200005DE0A5 /* WeatherService.swift in Sources */,
 				BD989B8E2C262849005DE0A5 /* ContentView.swift in Sources */,
 				BD989B8C2C262849005DE0A5 /* weatherApp.swift in Sources */,
+				BD2FFDCB2C2CA46C0037A808 /* EditLocView.swift in Sources */,
 				BDC835F72C2B25B500133FFE /* LocationViewModel.swift in Sources */,
 				BD989B9B2C2631EE005DE0A5 /* LocationManager.swift in Sources */,
 			);

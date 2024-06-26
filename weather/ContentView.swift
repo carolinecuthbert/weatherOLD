@@ -30,94 +30,168 @@ struct ContentView: View {
     @State private var formal = false
     @State private var athletic = false
     @State private var casual = false
+    @State private var editLoc = false
     
     var body: some View {
         VStack {
             var temperature = Int(1.8 * (weather?.main.temp ?? 0.0) + 32)
             var description = weather?.weather.first?.description ?? ""
-            if (!locChanged) {
-                Text(viewModel.cityName ?? "")
-                    .font(.system(size: 45))
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.center)
-            } else {
-                Text(cityName)
-                    .font(.system(size: 45))
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.center)
-            }
-            Button("edit location") {
-                if (cityTemp=="") {}
-                else {
-                    cityName = cityTemp
-                    locChanged = true
-                    fetchWeather()
-                    temperature = Int(1.8 * (weather?.main.temp ?? 0.0) + 32)
-                    description = weather?.weather.first?.description ?? ""
+            if (!editLoc) {
+                if (!locChanged) {
+                    Text(viewModel.cityName ?? "")
+                        .font(.system(size: 45))
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text(cityName)
+                        .font(.system(size: 45))
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
                 }
+                Button("edit location") {
+                    self.editLoc = true
+                    if (cityTemp=="") {}
+                    else {
+                        cityName = cityTemp
+                        locChanged = true
+                        fetchWeather()
+                        temperature = Int(1.8 * (weather?.main.temp ?? 0.0) + 32)
+                        description = weather?.weather.first?.description ?? ""
+                    }
+                }
+                .foregroundColor(Color("dark blue"))
+                Spacer()
+                    .frame(height: 30.0)
+            } else {
+                TextField("Enter city name...", text: $cityTemp, onCommit: {
+                    viewModel.getCoordinates(for: cityTemp)
+                })
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal, 40.0)
+                Button("enter") {
+                    if (cityTemp=="") {}
+                    else {
+                        self.editLoc = false
+                        cityName = cityTemp
+                        locChanged = true
+                        fetchWeather()
+                        temperature = Int(1.8 * (weather?.main.temp ?? 0.0) + 32)
+                        description = weather?.weather.first?.description ?? ""
+                        cityTemp = ""
+                    }
+                }
+                .foregroundColor(Color("dark blue"))
+                .font(.system(size: 25))
+                Spacer()
+                    .frame(height: 33.0)
             }
-            .foregroundColor(Color("dark blue"))
             ZStack{
                 RoundedRectangle(cornerRadius: 15.0)
                     .frame(width: 300.0)
                     .frame(height: 200.0)
                     .foregroundColor(Color ("light blue"))
                     .shadow(radius: 5.0)
-                VStack{
-                    Text("\(temperature)°F")
-                        .font(.system(size: 60))
-                        .multilineTextAlignment(.center)
-                    Text(description)
-                        .font(.system(size: 40))
-                        .padding(.horizontal, 60)
-                        .multilineTextAlignment(.center)
+                if (editLoc) {}
+                else {
+                    VStack{
+                        Text("\(temperature)°F")
+                            .font(.system(size: 60))
+                            .multilineTextAlignment(.center)
+                        Text(description)
+                            .font(.system(size: 40))
+                            .padding(.horizontal, 60)
+                            .multilineTextAlignment(.center)
+                    }
                 }//end of VStack
             }//end of ZStack
+            .padding(.horizontal, 40.0)
             Spacer()
-                .frame(height: 10.0)
+                .frame(height: 20.0)
             Text("Occasion:")
                 .font(.system(size: 30))
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
             HStack{
-                Button("Formal") {
-                    print("hi")
-                }
+                if (formal) {
+                    Button("Formal") {
+                        self.formal = true
+                        self.athletic = false
+                        self.casual = false
+                    }
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
                     .foregroundStyle(Color.black)
                     .tint(Color("for"))
+                    .border(Color.black, width: 4)
+                } else {
+                    Button("Formal") {
+                        self.formal = true
+                        self.athletic = false
+                        self.casual = false
+                    }
+                    .font(.title2)
+                    .buttonStyle(.borderedProminent)
+                    .foregroundStyle(Color.black)
+                    .tint(Color("for"))
+                }
                 Spacer()
                     .frame(width: 20.0)
-                Button("Athletic") {
-                    print("hi")
-                }
+                if (athletic) {
+                    Button("Athletic") {
+                        self.athletic = true
+                        self.formal = false
+                        self.casual = false
+                    }
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
                     .foregroundStyle(Color.black)
                     .tint(Color("ath"))
+                    .border(Color.black, width: 4)
+                } else {
+                    Button("Athletic") {
+                        self.athletic = true
+                        self.formal = false
+                        self.casual = false
+                    }
+                    .font(.title2)
+                    .buttonStyle(.borderedProminent)
+                    .foregroundStyle(Color.black)
+                    .tint(Color("ath"))
+                }
                 Spacer()
                     .frame(width: 20.0)
-                Button("Casual") {
-                    print("hi")
-                }
+                if (casual) {
+                    Button("Casual") {
+                        self.casual = true
+                        self.formal = false
+                        self.athletic = false
+                    }
                     .font(.title2)
                     .buttonStyle(.borderedProminent)
                     .foregroundStyle(Color.black)
                     .tint(Color("cas"))
+                    .border(Color.black, width: 4)
+                } else {
+                    Button("Casual") {
+                        self.casual = true
+                        self.formal = false
+                        self.athletic = false
+                    }
+                    .font(.title2)
+                    .buttonStyle(.borderedProminent)
+                    .foregroundStyle(Color.black)
+                    .tint(Color("cas"))
+                }
             }//end of HStack
             Spacer()
-            Text("Recommended:")
-                .font(.system(size: 30))
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.left)
-                .multilineTextAlignment(.leading)
-            TextField("Enter city name", text: $cityTemp, onCommit: {
-                viewModel.getCoordinates(for: cityTemp)
-            })
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .padding()
+            HStack{
+                Text("Recommended:")
+                    .font(.system(size: 30))
+                    .fontWeight(.semibold)
+                Spacer()
+            }.padding(25.0)
         }//end of VStack
+        .padding(.top, 10.0)
         .onAppear {
             if let location = locationManager.location {
                 fetchWeather(for: location)
@@ -128,7 +202,7 @@ struct ContentView: View {
                 fetchWeather(for: location)
             }
         }
-    }//end of view
+    }//end of body
     
     //
     //
@@ -157,7 +231,7 @@ struct ContentView: View {
             }
         }
     }
-}
+}//end of view
 
 func getCoordinate( addressString : String,
                     completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
