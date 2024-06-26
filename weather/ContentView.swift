@@ -179,7 +179,7 @@ struct ContentView: View {
             HStack{
                 if (!editLoc) {
                     Text(listRecs)
-                        .font(.system(size: 30))
+                        .font(.system(size: 25))
                     Spacer()
                 }
             }
