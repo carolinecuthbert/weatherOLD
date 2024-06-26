@@ -1,12 +1,17 @@
 import SwiftUI
+import SwiftData
 
 struct CreateView: View {
     @State private var formal = false
     @State private var athletic = false
     @State private var casual = false
-    @State private var title = ""
+    /*@State private var title = ""
     @State private var location = ""
     @State private var tripLength = ""
+    @State private var occasion = ""*/
+    @Bindable var tripItem: TripItem
+    @Environment(\.modelContext) var modelContext
+    @Binding var showNewTask: Bool
     
     var body: some View {
         NavigationStack {
@@ -20,7 +25,7 @@ struct CreateView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 } // HStack
                 
-                TextField("Type here...", text: $title)
+                TextField("Type here...", text: $tripItem.title)
                     .font(.system(size: 25))
                     .multilineTextAlignment(.center)
                     .background(Color(.systemGroupedBackground))
@@ -38,7 +43,7 @@ struct CreateView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 } // HStack
                 
-                TextField("Type here...", text: $location)
+                TextField("Type here...", text: $tripItem.location)
                     .font(.system(size: 25))
                     .multilineTextAlignment(.center)
                     .background(Color(.systemGroupedBackground))
@@ -55,7 +60,7 @@ struct CreateView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 } // HStack
                 
-                TextField("Type a number here...", text: $tripLength)
+                TextField("Type a number here...", text: $tripItem.date)
                     .font(.system(size: 25))
                     .multilineTextAlignment(.center)
                     .background(Color(.systemGroupedBackground))
@@ -76,11 +81,7 @@ struct CreateView: View {
                 
                 HStack{
                     if (formal) {
-                        Button("Formal") {
-                            self.formal = true
-                            self.athletic = false
-                            self.casual = false
-                        }
+                        Button("Formal") {}
                         .font(.title2)
                         .buttonStyle(.borderedProminent)
                         .foregroundStyle(Color.black)
@@ -88,9 +89,7 @@ struct CreateView: View {
                         .border(Color.black, width: 4)
                     } else {
                         Button("Formal") {
-                            self.formal = true
-                            self.athletic = false
-                            self.casual = false
+                            tripItem.occasion = "formal"
                         }
                         .font(.title2)
                         .buttonStyle(.borderedProminent)
@@ -100,11 +99,7 @@ struct CreateView: View {
                     Spacer()
                         .frame(width: 20.0)
                     if (athletic) {
-                        Button("Athletic") {
-                            self.athletic = true
-                            self.formal = false
-                            self.casual = false
-                        }
+                        Button("Athletic") {}
                         .font(.title2)
                         .buttonStyle(.borderedProminent)
                         .foregroundStyle(Color.black)
@@ -112,9 +107,7 @@ struct CreateView: View {
                         .border(Color.black, width: 4)
                     } else {
                         Button("Athletic") {
-                            self.athletic = true
-                            self.formal = false
-                            self.casual = false
+                            tripItem.occasion = "athletic"
                         }
                         .font(.title2)
                         .buttonStyle(.borderedProminent)
@@ -124,11 +117,7 @@ struct CreateView: View {
                     Spacer()
                         .frame(width: 20.0)
                     if (casual) {
-                        Button("Casual") {
-                            self.casual = true
-                            self.formal = false
-                            self.athletic = false
-                        }
+                        Button("Casual") {}
                         .font(.title2)
                         .buttonStyle(.borderedProminent)
                         .foregroundStyle(Color.black)
@@ -136,9 +125,7 @@ struct CreateView: View {
                         .border(Color.black, width: 4)
                     } else {
                         Button("Casual") {
-                            self.casual = true
-                            self.formal = false
-                            self.athletic = false
+                            tripItem.occasion = "casual"
                         }
                         .font(.title2)
                         .buttonStyle(.borderedProminent)
@@ -147,7 +134,6 @@ struct CreateView: View {
                         
                     }
                 }//end of HStack
-                
                 Spacer()
                 
                 NavigationLink(destination: Text("Hello")) {
@@ -159,7 +145,6 @@ struct CreateView: View {
                 .buttonStyle(.borderedProminent)
                 .foregroundStyle(Color.black)
                 .tint(Color("cre"))
-                
                 }
             }
         }
@@ -167,5 +152,10 @@ struct CreateView: View {
 }
 
 #Preview {
-    CreateView()
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: TripItem.self, configurations: config)
+
+    let trip = TripItem(title: "", location: "", date: "", occasion: "")
+    return CreateView(tripItem: trip, showNewTask: .constant(true))
+        .modelContainer(container)
 }

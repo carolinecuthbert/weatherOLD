@@ -12,7 +12,7 @@ struct weatherApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: ToDoItem.self)
+                .modelContainer(for: TripItem.self)
         }
     }
 }
