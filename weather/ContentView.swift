@@ -19,7 +19,7 @@ struct ContentView: View {
             .fontWeight(.bold)
             .foregroundColor(Color(hue: 0.538, saturation: 0.526, brightness: 0.603))
           HStack{
-            NavigationLink(destination: Lists()) {
+            NavigationLink(destination: TripsView()) {
             label: do{Image("GoToLists")
                 .resizable()
               .frame(width: 100.0, height:100.0)}
