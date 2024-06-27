@@ -7,6 +7,7 @@ struct GameView: View {
     @State private var flipCount = 0
     @State private var flip1 = ""
     @State private var flipNum = -1
+    @State private var okay = false
     var body: some View {
         VStack {
             Text("Match the cards!")
@@ -15,38 +16,30 @@ struct GameView: View {
                 .padding()
             HStack {
                 Button {
-                    if (matches[0]) {}
+                    let num = 0
+                    if (matches[num]) {}
                     else {
-                        if (flips[0]) {
-                            flips[0] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[0] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[0]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[0] == flip1) {
-                                    matches[0] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[0] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[0]) {
+                    let num = 0
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[0]) {
-                        Image(icons[0])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -56,38 +49,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[1]) {}
+                    let num = 1
+                    if (matches[num]) {}
                     else {
-                        if (flips[1]) {
-                            flips[1] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[1] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[1]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[1] == flip1) {
-                                    matches[1] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[1] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[1]) {
+                    let num = 1
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[1]) {
-                        Image(icons[1])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -97,38 +82,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[2]) {}
+                    let num = 2
+                    if (matches[num]) {}
                     else {
-                        if (flips[2]) {
-                            flips[2] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[2] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[2]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[2] == flip1) {
-                                    matches[2] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[2] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[2]) {
+                    let num = 2
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[2]) {
-                        Image(icons[2])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -138,38 +115,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[3]) {}
+                    let num = 3
+                    if (matches[num]) {}
                     else {
-                        if (flips[3]) {
-                            flips[3] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[3] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[3]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[3] == flip1) {
-                                    matches[3] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[3] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[3]) {
+                    let num = 3
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[3]) {
-                        Image(icons[3])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -182,38 +151,30 @@ struct GameView: View {
             .padding(.horizontal) // HStack
             HStack {
                 Button {
-                    if (matches[4]) {}
+                    let num = 4
+                    if (matches[num]) {}
                     else {
-                        if (flips[4]) {
-                            flips[4] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[4] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[4]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[4] == flip1) {
-                                    matches[4] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[4] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[4]) {
+                    let num = 4
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[4]) {
-                        Image(icons[4])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -223,38 +184,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[5]) {}
+                    let num = 5
+                    if (matches[num]) {}
                     else {
-                        if (flips[5]) {
-                            flips[5] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[5] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[5]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[5] == flip1) {
-                                    matches[5] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[5] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[5]) {
+                    let num = 5
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[5]) {
-                        Image(icons[5])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -264,38 +217,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[6]) {}
+                    let num = 6
+                    if (matches[num]) {}
                     else {
-                        if (flips[6]) {
-                            flips[6] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[6] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[6]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[6] == flip1) {
-                                    matches[6] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[6] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[6]) {
+                    let num = 6
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[6]) {
-                        Image(icons[6])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -305,38 +250,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[7]) {}
+                    let num = 7
+                    if (matches[num]) {}
                     else {
-                        if (flips[7]) {
-                            flips[7] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[7] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[7]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[7] == flip1) {
-                                    matches[7] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[7] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[7]) {
+                    let num = 7
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[7]) {
-                        Image(icons[7])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -349,38 +286,30 @@ struct GameView: View {
             .padding(.horizontal) // HStack
             HStack {
                 Button {
-                    if (matches[8]) {}
+                    let num = 8
+                    if (matches[num]) {}
                     else {
-                        if (flips[8]) {
-                            flips[8] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[8] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[8]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[8] == flip1) {
-                                    matches[8] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[8] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[8]) {
+                    let num = 8
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[8]) {
-                        Image(icons[8])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -390,38 +319,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[9]) {}
+                    let num = 9
+                    if (matches[num]) {}
                     else {
-                        if (flips[9]) {
-                            flips[9] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[9] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[9]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[9] == flip1) {
-                                    matches[9] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[9] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[9]) {
+                    let num = 9
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[9]) {
-                        Image(icons[9])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -431,38 +352,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[10]) {}
+                    let num = 10
+                    if (matches[num]) {}
                     else {
-                        if (flips[10]) {
-                            flips[10] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[10] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[10]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[10] == flip1) {
-                                    matches[10] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[10] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[10]) {
+                    let num = 10
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[10]) {
-                        Image(icons[10])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -472,38 +385,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[11]) {}
+                    let num = 11
+                    if (matches[num]) {}
                     else {
-                        if (flips[11]) {
-                            flips[11] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[11] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[11]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[11] == flip1) {
-                                    matches[11] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[11] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[11]) {
+                    let num = 11
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[11]) {
-                        Image(icons[11])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -516,38 +421,30 @@ struct GameView: View {
             .padding(.horizontal) // HStack
             HStack {
                 Button {
-                    if (matches[12]) {}
+                    let num = 12
+                    if (matches[num]) {}
                     else {
-                        if (flips[12]) {
-                            flips[12] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[12] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[12]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[12] == flip1) {
-                                    matches[12] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[12] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[12]) {
+                    let num = 12
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[12]) {
-                        Image(icons[12])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -557,38 +454,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[13]) {}
+                    let num = 13
+                    if (matches[num]) {}
                     else {
-                        if (flips[13]) {
-                            flips[13] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[13] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[13]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[13] == flip1) {
-                                    matches[13] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[13] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[13]) {
+                    let num = 13
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[13]) {
-                        Image(icons[13])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -598,38 +487,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[14]) {}
+                    let num = 14
+                    if (matches[num]) {}
                     else {
-                        if (flips[14]) {
-                            flips[14] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[14] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[14]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[14] == flip1) {
-                                    matches[14] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[14] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[14]) {
+                    let num = 14
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[14]) {
-                        Image(icons[14])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -639,38 +520,30 @@ struct GameView: View {
                     }
                 }
                 Button {
-                    if (matches[15]) {}
+                    let num = 15
+                    if (matches[num]) {}
                     else {
-                        if (flips[15]) {
-                            flips[15] = false
+                        if (flips[num]) {
+                            flips[num] = false
                         } else {
-                            flips[15] = true
+                            flips[num] = true
                         }
                         flipCount+=1
                         if (flipCount==1) {
-                            flip1 = icons[15]
-                            flipNum = -1
+                            flip1 = icons[num]
+                            flipNum = num
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if (icons[15] == flip1) {
-                                    matches[15] = true
-                                    matches[flipNum] = true
-                                } else {
-                                    flips[15] = false
-                                    flips[flipNum] = false
-                                }
-                                flip1 = ""
-                                flipCount = 0
-                            }
+                            wait(ind: num)
                         }
                     }
                 } label: {
-                    if (matches[15]) {
+                    let num = 15
+                    if (matches[num]) {
                         Image("cardGone")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                    } else if (flips[15]) {
-                        Image(icons[15])
+                    } else if (flips[num]) {
+                        Image(icons[num])
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {
@@ -687,6 +560,23 @@ struct GameView: View {
             icons.shuffle()
         }
     } // body
+    
+    func wait(ind: Int) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            withAnimation {
+                if (icons[ind] == flip1) {
+                    matches[ind] = true
+                    matches[flipNum] = true
+                } else {
+                    flips[ind] = false
+                    flips[flipNum] = false
+                }
+                flip1 = ""
+                flipCount = 0
+                flipNum = -1
+            }
+        }
+    }
 } // end of view
 
 #Preview {
