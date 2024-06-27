@@ -24,21 +24,16 @@ struct ContentView: View {
                 .resizable()
               .frame(width: 100.0, height:100.0)}
             } // closes navLink
-            NavigationLink(destination: Text("Game")) {
+            NavigationLink(destination: GameView()) {
             label: do{Image("game")
                 .resizable()
               .frame(width: 100, height: 100)}
             }
-            //.frame(width: 150.0)
-            //.padding(.all, -50.0)
             NavigationLink(destination: DailyView()) {
             label: do{Image("WeatherButton")
                 .resizable()
               .frame(width: 100, height: 100)}
             }
-            //.padding(.all, -15.0)
-            //.frame(width: 160.0, height: 50.0)
-            //.frame(width: 100.0, height: -2.0)
             //closes HStack
           }//closes VStack
         }//closes ZStack

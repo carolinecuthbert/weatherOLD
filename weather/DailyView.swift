@@ -172,7 +172,7 @@ struct DailyView: View {
                 .frame(height: 25.0)
             HStack{
                 Text("Recommended:")
-                    .font(.system(size: 40))
+                    .font(.system(size: 35))
                     .fontWeight(.semibold)
                 Spacer()
             }.padding(.horizontal, 25.0)
@@ -203,7 +203,6 @@ struct DailyView: View {
     private func fetchRecs(temp: Int, info: String) {
         var recs = [String] ()
         listRecs = ""
-        var warmth = ""
         if (formal) {
             if (temp<32) {
                 recs.append("Long dress / suit")
@@ -232,8 +231,7 @@ struct DailyView: View {
                 recs.append("Leggings (under shorts)")
                 recs.append("Hoodie")
                 recs.append("Thin puffer")
-                recs.append("Beanie")
-                recs.append("Gloves")
+                recs.append("Beanie / gloves")
                 recs.append("Sneakers")
             }
             else if (temp<50) {
@@ -261,8 +259,7 @@ struct DailyView: View {
                 recs.append("Jeans / sweatpants")
                 recs.append("Hoodie")
                 recs.append("Warm coat")
-                recs.append("Beanie")
-                recs.append("Gloves")
+                recs.append("Beanie / gloves")
                 recs.append("Snow boots")
             }
             else if (temp<50) {
