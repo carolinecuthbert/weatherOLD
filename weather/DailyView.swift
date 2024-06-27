@@ -100,7 +100,7 @@ struct DailyView: View {
             }//end of ZStack
             .padding(.horizontal, 40.0)
             Spacer()
-                .frame(height: 20.0)
+                .frame(height: 15.0)
             Text("Occasion:")
                 .font(.system(size: 30))
                 .fontWeight(.semibold)
@@ -169,7 +169,7 @@ struct DailyView: View {
                 }
             }//end of HStack
             Spacer()
-                .frame(height: 30.0)
+                .frame(height: 25.0)
             HStack{
                 Text("Recommended:")
                     .font(.system(size: 40))
@@ -179,12 +179,12 @@ struct DailyView: View {
             HStack{
                 if (!editLoc) {
                     Text(listRecs)
-                        .font(.system(size: 25))
+                        .font(.system(size: 30))
                     Spacer()
                 }
             }
-            .padding(.leading, 75.0)
-            .padding(.trailing, 25.0)
+            .padding(.leading, 50.0)
+            .padding(.trailing, 5.0)
             Spacer()
         }//end of VStack
         .padding(.top, 10.0)
@@ -205,78 +205,105 @@ struct DailyView: View {
         listRecs = ""
         var warmth = ""
         if (formal) {
-            if (temp<30) {
-                recs.append("Formal attire")
-                recs.append("Freezing")
+            if (temp<32) {
+                recs.append("Long dress / suit")
+                recs.append("Sweater / Heavy coat")
+                recs.append("Scarf")
+                recs.append("Snow boots")
+                recs.append("Gloves")
             }
             else if (temp<50) {
-                recs.append("Formal attire")
-                recs.append("Cool")
+                recs.append("Dress and coat / suit")
+                recs.append("Formal shoes")
             }
             else if (temp<75) {
-                recs.append("Formal attire")
-                recs.append("Warm")
+                recs.append("Dress and sweater / suit")
+                recs.append("Formal shoes")
             }
             else {
-                recs.append("Formal attire")
-                recs.append("Hot")
+                recs.append("Sundress / dress shirt and pants")
+                recs.append("Sunglasses")
+                recs.append("Formal shoes")
             }
         }
         else if (athletic) {
-            if (temp<30) {
-                recs.append("Athletic attire")
-                recs.append("Freezing")
+            if (temp<32) {
+                recs.append("Thermals")
+                recs.append("Leggings (under shorts)")
+                recs.append("Hoodie")
+                recs.append("Thin puffer")
+                recs.append("Beanie")
+                recs.append("Gloves")
+                recs.append("Sneakers")
             }
             else if (temp<50) {
-                recs.append("Athletic attire")
-                recs.append("Cool")
+                recs.append("Leggings (under shorts)")
+                recs.append("Athletic t-shirt")
+                recs.append("Quarter-zip")
+                recs.append("Gloves")
+                recs.append("Sneakers")
             }
             else if (temp<75) {
-                recs.append("Athletic attire")
-                recs.append("Warm")
+                recs.append("Leggings / shorts")
+                recs.append("Athletic t-shirt")
+                recs.append("Sneakers")
             }
             else {
-                recs.append("Athletic attire")
-                recs.append("Hot")
+                recs.append("Shorts")
+                recs.append("Athletic tank top")
+                recs.append("Sunglasses")
+                recs.append("Sneakers")
             }
         }
         else if (casual) {
-            if (temp<30) {
-                recs.append("Casual attire")
-                recs.append("Freezing")
+            if (temp<32) {
+                recs.append("Thermals")
+                recs.append("Jeans / sweatpants")
+                recs.append("Hoodie")
+                recs.append("Warm coat")
+                recs.append("Beanie")
+                recs.append("Gloves")
+                recs.append("Snow boots")
             }
             else if (temp<50) {
-                recs.append("Casual attire")
-                recs.append("Cool")
+                recs.append("Jeans")
+                recs.append("T-shirt")
+                recs.append("Sweatshirt")
+                recs.append("Beanie / gloves")
+                recs.append("Sneakers")
             }
             else if (temp<75) {
-                recs.append("Casual attire")
-                recs.append("Warm")
+                recs.append("Jeans / leggings")
+                recs.append("T-shirt")
+                recs.append("Zip-up hoodie")
+                recs.append("Sneakers")
             }
             else {
-                recs.append("Casual attire")
-                recs.append("Hot")
+                recs.append("(Jean) shorts")
+                recs.append("Tank top / t-shirt")
+                recs.append("Sunglasses")
+                recs.append("Sneakers / sandals")
             }
         }
-        if info.contains("rain") || info.contains("storm"){
+        if info.contains("rain") || info.contains("storm") || info.contains("thunder") || info.contains("lightning"){
             recs.append("Raincoat")
-            if info.contains("thunder") || info.contains("lightning") {
-                recs.append("Rainboots")
-            }
         }
         if info.contains("hail") {
             recs.append("Helmet")
             recs.append("Waterproof jacket")
         }
-        if info.contains("snow") {
-            recs.append("Snow jacket")
-            recs.append("Snow pants")
-            recs.append("Snow boots")
-            recs.append("Mittens")
-            recs.append("Beanie")
+        if info.contains("tornado") || info.contains("hurricane") {
+            recs.append("Helmet")
         }
+        
+        var index = 0
         for item in recs {
-            listRecs = listRecs + "- \(item)\n"
+            if (index == recs.count-1) {
+                listRecs = listRecs + "- \(item)"
+            } else {
+                listRecs = listRecs + "- \(item)\n"
+                index += 1
+            }
         }
     }
     
