@@ -20,7 +20,7 @@ struct TripsView: View {
                         .font(.system(size: 40))
                         .fontWeight(.bold)
                     Spacer()
-                    NavigationLink(destination: CreateView(tripItem: TripItem(title: "", location: "", date: "", occasion: ""), showNewTask: $showNewTask)) {
+                    NavigationLink(destination: CreateView(tripItem: TripItem(title: "", location: "", date: "", occasion: ""))) {
                         Text("+")
                             .font(.system(size: 50))
                     }
@@ -28,14 +28,13 @@ struct TripsView: View {
                 .padding()
                 Spacer()
                 List {
-                    //ForEach(trips) {}
-                    //.onDelete(perform: deleteToDo)
+                    ForEach(trips) { tripItem in
+                        Text(tripItem.title)
+                    }
+                    .onDelete(perform: deleteToDo)
                 }
                 .listStyle(.plain)
             }//end of VStack
-            if showNewTask {
-                NewToDoView(toDoItem: TripItem(title: "", location: "", date: "", occasion: ""), showNewTask: $showNewTask)
-            }
         }
     }//end of body
     func deleteToDo(at offsets: IndexSet) {
