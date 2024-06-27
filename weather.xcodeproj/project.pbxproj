@@ -19,6 +19,7 @@
 		BD989B9B2C2631EE005DE0A5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD989B9A2C2631EE005DE0A5 /* LocationManager.swift */; };
 		BD989B9D2C263200005DE0A5 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD989B9C2C263200005DE0A5 /* WeatherService.swift */; };
 		BDC835F72C2B25B500133FFE /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC835F62C2B25B500133FFE /* LocationViewModel.swift */; };
+		BDDFB05C2C2DF3DE009AECD0 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDFB05B2C2DF3DE009AECD0 /* Cards.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		BD989B9A2C2631EE005DE0A5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		BD989B9C2C263200005DE0A5 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		BDC835F62C2B25B500133FFE /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		BDDFB05B2C2DF3DE009AECD0 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				BD2FFDEA2C2CC4D60037A808 /* ContentView.swift */,
 				BD989B8D2C262849005DE0A5 /* DailyView.swift */,
 				BD68AD432C2DE0E90058A3DE /* GameView.swift */,
+				BDDFB05B2C2DF3DE009AECD0 /* Cards.swift */,
 				BD2FFDF22C2CC8310037A808 /* TripsView.swift */,
 				BD2FFDF42C2CC84D0037A808 /* CreateView.swift */,
 				BD2FFDF62C2CC85F0037A808 /* TripItem.swift */,
@@ -168,6 +171,7 @@
 				BD989B8E2C262849005DE0A5 /* DailyView.swift in Sources */,
 				BD2FFDEB2C2CC4D60037A808 /* ContentView.swift in Sources */,
 				BD2FFDF52C2CC84D0037A808 /* CreateView.swift in Sources */,
+				BDDFB05C2C2DF3DE009AECD0 /* Cards.swift in Sources */,
 				BD989B8C2C262849005DE0A5 /* weatherApp.swift in Sources */,
 				BD2FFDF72C2CC85F0037A808 /* TripItem.swift in Sources */,
 				BDC835F72C2B25B500133FFE /* LocationViewModel.swift in Sources */,

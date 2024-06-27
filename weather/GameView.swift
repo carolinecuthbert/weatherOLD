@@ -1,33 +1,27 @@
 import SwiftUI
 
 struct GameView: View {
+    @State private var cardz = [Cards] ()
     var body: some View {
         VStack {
             Text("Match the cards!")
                 .font(.system(size: 43))
                 .bold()
                 .padding()
-            /*HStack{
-                NavigationLink(destination: TripsView()) {
-                label: do{Image("GoToLists")
-                        .resizable()
-                    .frame(width: 100.0, height:100.0)}
-                }// closes navLink
-                NavigationLink(destination: ContentView()) {
-                label: do{Image("game")
-                        .resizable()
-                    .frame(width: 100, height: 100)}
-                }//closes navLink
-                NavigationLink(destination: DailyView()) {
-                label: do{Image("WeatherButton")
-                        .resizable()
-                    .frame(width: 100, height: 100)}
-                }//closes navLink
-            }*/
             HStack {
-                Image("PlayingCard_Back_Red")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                Button {
+                    cardz[0].flipped = true
+                } label: {
+                    if (cardz[0].flipped) {
+                        Image("PlayingCard_Back_Red")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    } else {
+                        Image("PlayingCard_Back_Red")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }
+                }
                 Image("PlayingCard_Back_Red")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -87,6 +81,25 @@ struct GameView: View {
                     .aspectRatio(contentMode: .fit)
             }
             .padding(.horizontal) // HStack
+            .onAppear(perform: {
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.append(Cards(frontImage: "game", flipped: false))
+                cardz.shuffle()
+            })
         } // VStack
     } // body
 } // end of view
