@@ -24,7 +24,7 @@ struct ContentView: View {
                 .resizable()
               .frame(width: 100.0, height:100.0)}
             } // closes navLink
-            NavigationLink(destination: inputPage()) {
+            NavigationLink(destination: Text("Game")) {
             label: do{Image("game")
                 .resizable()
               .frame(width: 100, height: 100)}
