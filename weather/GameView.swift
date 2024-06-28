@@ -565,9 +565,13 @@ struct GameView: View {
         else {
             Text("Congratulations!")
                 .font(.system(size: 40.0))
+            Spacer()
+                .frame(height: 100.0)
             Text("🎊 YOU WON 🎊")
                 .font(.system(size: 60.0))
                 .foregroundStyle(Color("dark blue"))
+            Spacer()
+                .frame(height: 200.0)
             Button("Play again?") {
                 won = false
             }
